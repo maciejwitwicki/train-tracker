@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15.1
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./docker/postgres-data:/var/lib/postgresql/data
+    networks:
+      - local-keycloak
+  keycloak:
+      image: quay.io/keycloak/keycloak:21.1.0
+      environment:
+        KC_DB: postgres
+        KC_DB_URL_HOST: postgres
+        KC_DB_URL_PORT: 5432
+        KC_DB_URL_DATABASE: keycloak_db
+        KC_DB_USERNAME: postgres
+        KC_DB_PASSWORD: postgres
+        KC_DB_SCHEMA: public
+        KEYCLOAK_ADMIN: admin
+        KEYCLOAK_ADMIN_PASSWORD: admin
+      depends_on:
+        - postgres
+      command: ['start-dev --import-realm']
+      volumes:
+        - ./docker/keycloak-data:/opt/keycloak/data/import
+      ports:
+        - "28080:8080"
+      restart: unless-stopped
+      networks:
+        - local-keycloak
+
+networks:
+  local-keycloak:
+
+
