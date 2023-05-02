@@ -1,20 +1,30 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {finalize, map, Observable} from "rxjs";
-import {UserCredentials, UserDetails} from "./user.model";
-import {AuthService} from "../auth/auth.service";
+import {HttpBackend, HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {UserDetails} from "./user.model";
 
 @Injectable()
 export class UserService {
 
   private static readonly USERS_URL = 'http://localhost:8080/users';
+  private static readonly REGISTER_URL = 'http://localhost:8080/register';
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  private registerHttpClient: HttpClient;
+
+  constructor(private http: HttpClient, private httpBackend: HttpBackend) {
+    this.registerHttpClient = new HttpClient(httpBackend); //use custom client instead the default which has interceptors
   }
 
   getUserDetails(): Observable<UserDetails> {
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get<UserDetails>(UserService.USERS_URL, {headers: headers});
+    return this.http.get<UserDetails>(UserService.USERS_URL);
   }
 
+  createUser(username: any, password: any, email: any) {
+    const request = {
+      username,
+      password,
+      email
+    };
+    return this.registerHttpClient.post<UserDetails>(UserService.REGISTER_URL, request);
+  }
 }

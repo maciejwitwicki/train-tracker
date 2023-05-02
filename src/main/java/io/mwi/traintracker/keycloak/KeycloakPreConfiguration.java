@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KeycloakPreConfiguration implements ApplicationRunner {
+class KeycloakPreConfiguration implements ApplicationRunner {
 
     private final static String REALM_MANAGEMENT_CLIENT_ID_SUFFIX = "-realm";
 

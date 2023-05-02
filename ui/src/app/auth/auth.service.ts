@@ -37,7 +37,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.tokenService.hasAuthToken();
+    return this.tokenService.hasAccessToken();
+  }
+
+  getToken() {
+    return this.tokenService.getAccessToken();
   }
 
   getAuthHeaders() {
@@ -58,6 +62,16 @@ export class AuthService {
     this.loggedInListeners.push(callback);
   }
 
+  setAccessToken(token: string, expiresInSeconds: number) {
+    this.updateAccessToken(token, expiresInSeconds);
+  }
+
+
+  private updateAccessToken(token: string, expiresIn: number | null) {
+    this.tokenService.saveAccessToken(token, expiresIn);
+    this.loggedInListeners.forEach(callback => callback());
+  }
+
   private listenToNavigationEndEvent(router: Router) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -76,12 +90,10 @@ export class AuthService {
           const accessToken = params.get(AuthService.ACCESS_TOKEN_URL_PARAM);
           const expiresIn = params.get(AuthService.EXPIRES_IN_URL_PARAM);
           if (accessToken) {
-            this.tokenService.saveAuthToken(accessToken, expiresIn);
-            this.loggedInListeners.forEach(callback => callback());
+            this.updateAccessToken(accessToken, expiresIn ? +expiresIn : null);
           }
         }
       }
     })
   }
-
 }

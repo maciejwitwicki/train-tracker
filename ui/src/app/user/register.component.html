@@ -1,0 +1,40 @@
+<div *ngIf="!created" class="card">
+  <h4 class="card-header">Register new user</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && getUsernameField().errors }" />
+        <div *ngIf="submitted && getUsernameField().errors" class="invalid-feedback">
+          <div *ngIf="getFormUsernameRequired()">Username is required</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && getPasswordField().errors }" />
+        <div *ngIf="submitted && getPasswordField().errors" class="invalid-feedback">
+          <div *ngIf="getFormPasswordRequired()">Password is required</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && getEmailField().errors }" />
+        <div *ngIf="submitted && getEmailField().errors" class="invalid-feedback">
+          <div *ngIf="getFormEmailRequired()">Email is required</div>
+        </div>
+      </div>
+      <div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div *ngIf="created" class="card">
+  <div class="mb-3">User has been created. Go to the login screen and use your credentials to... log in ;)</div>
+</div>
+<div *ngIf="error" class="card">
+  <div class="mb-3">Error occurred while register attempt. {{error}}</div>
+</div>

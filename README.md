@@ -4,7 +4,9 @@ angular + spring boot 3, oauth2 secured
 # Running locally
 Follow the steps in given order
 ## Start docker compose
-Prerequisite: docker daemon installed and running
+
+*Prerequisite*: docker daemon installed and running
+
 ```shell
 docker compoose up
 ```
@@ -12,6 +14,8 @@ This will start:
 - Postgres DB (to be used by Keycloak)
 - Keycloak server
 ## Start train-tracker backend
+
+*Prerequisite*: java 19 jdk installed
 
 ```shell
 gradlew bootRun
@@ -21,7 +25,7 @@ This will start API service for train-tracker available under http://localhost:8
 
 ## Start train-tracker UI
 
-Prerequisite: node 18 installed
+*Prerequisite*: node 18 installed
 
 ```shell
 cd ui

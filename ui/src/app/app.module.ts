@@ -6,24 +6,30 @@ import {AppComponent} from './app.component';
 import {UserModule} from "./user/user.module";
 import {FormsModule} from "@angular/forms";
 import {HomeComponent} from "./home.component";
-import {LoginComponent} from "./login.component";
 import {AuthModule} from "./auth/auth.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./auth/auth.interceptor";
+import {LoginModule} from "./login/login.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    LoginComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    LoginModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

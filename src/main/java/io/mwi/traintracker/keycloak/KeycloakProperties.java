@@ -10,6 +10,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record KeycloakProperties(
         @NotBlank String url,
         @NotBlank String realm,
+        @NotBlank String clientId,
+        @NotBlank String clientSecret,
         @NotNull AdminProperties admin,
         @NotNull SuperUserProperties superUser) {
 

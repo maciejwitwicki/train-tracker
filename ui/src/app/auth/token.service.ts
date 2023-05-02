@@ -11,19 +11,19 @@ export class TokenService {
   constructor(private cookieService: CookieService) {
   }
 
-  saveAuthToken(token: string, expiresIn: string | null) {
-    const expiresValue = expiresIn ? +expiresIn * 1000 : TokenService.DEFAULT_TOKEN_EXPIRES_MILLIS;
+  saveAccessToken(token: string, expiresIn: number | null) {
+    const expiresValue = expiresIn ? expiresIn * 1000 : TokenService.DEFAULT_TOKEN_EXPIRES_MILLIS;
     const expireDate = new Date().getTime() + expiresValue;
     console.log(`Setting access token to expire in  ${expiresValue} ms`);
     this.cookieService.set(TokenService.TOKEN_COOKIE_NAME, token, expireDate);
   }
 
   getAuthHeaders() {
-    const cookieValue = `Bearer ${this.getAuthToken()}`;
+    const cookieValue = `Bearer ${this.getAccessToken()}`;
     return new HttpHeaders({'Authorization': cookieValue});
   }
 
-  hasAuthToken(): boolean {
+  hasAccessToken(): boolean {
     return this.cookieService.check(TokenService.TOKEN_COOKIE_NAME);
   }
 
@@ -31,15 +31,14 @@ export class TokenService {
     this.cookieService.delete(TokenService.TOKEN_COOKIE_NAME);
   }
 
-  private getAuthToken(): string | null {
-    if (this.hasAuthToken()) {
-      var accessToken = this.cookieService.get('access_token');
+  getAccessToken(): string | null {
+    if (this.hasAccessToken()) {
+      const accessToken = this.cookieService.get('access_token');
       console.log("access token cookie value", accessToken);
       return accessToken;
     } else {
-      throw new Error("no auth token");
+      throw new Error("no access token");
     }
   }
-
 
 }

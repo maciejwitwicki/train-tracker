@@ -1,20 +1,21 @@
 import {NgModule} from "@angular/core";
-import {UserService} from "./user.service";
 import {HttpClientModule} from "@angular/common/http";
-import {RegisterComponent} from "./register.component";
+import {LoginFormComponent} from "./login-form.component";
+import {ImplicitLoginComponent} from "./implicit-login.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {LoginService} from "./login.service";
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [LoginFormComponent, ImplicitLoginComponent],
   imports: [
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule
   ],
-  providers: [UserService],
+  providers: [LoginService],
   exports: [],
   bootstrap: []
 })
-export class UserModule {
+export class LoginModule {
 }

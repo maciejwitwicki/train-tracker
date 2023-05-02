@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home.component";
-import {LoginComponent} from "./login.component";
+import {ImplicitLoginComponent} from "./login/implicit-login.component";
+import {LoginFormComponent} from "./login/login-form.component";
+import {RegisterComponent} from "./user/register.component";
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'home', component: HomeComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login-implicit', component: ImplicitLoginComponent},
+  { path: 'login-form', component: LoginFormComponent},
+  { path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({
