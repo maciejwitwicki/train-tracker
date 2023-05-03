@@ -1,0 +1,15 @@
+<div class="content" role="main">
+
+  <div class="card">
+    <p>Trains</p>
+    {{locations}}
+  </div>
+  <ul>
+    <div *ngFor="let loc of locations" class="highlight-card">
+      <div>{{loc.id}}</div>
+      <div>{{loc.destination}}</div>
+      <div>{{loc.coordinates.lon}}</div>
+      <div>{{loc.coordinates.lat}}</div>
+    </div>
+  </ul>
+</div>

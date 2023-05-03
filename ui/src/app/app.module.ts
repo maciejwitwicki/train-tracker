@@ -10,6 +10,7 @@ import {AuthModule} from "./auth/auth.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./auth/auth.interceptor";
 import {LoginModule} from "./login/login.module";
+import {TrainModule} from "./train/train.module";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {LoginModule} from "./login/login.module";
     AppRoutingModule,
     UserModule,
     AuthModule,
-    LoginModule
+    LoginModule,
+    TrainModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

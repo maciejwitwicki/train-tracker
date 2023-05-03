@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.oauth2.server.resource.web.server.authentication.ServerBearerTokenAuthenticationConverter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
@@ -29,12 +30,19 @@ public class AppConfiguration {
                 .csrf().disable()
                 .httpBasic().disable()
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))//.and()
-                .oauth2ResourceServer().jwt();
+                .oauth2ResourceServer()
+                .bearerTokenConverter(bearerTokenConverter()).jwt();
 
         return http.build();
     }
 
-    CorsConfigurationSource corsConfigurationSource() {
+    private ServerBearerTokenAuthenticationConverter bearerTokenConverter() {
+        var converter = new ServerBearerTokenAuthenticationConverter();
+        converter.setAllowUriQueryParameter(true);
+        return converter;
+    }
+
+    private CorsConfigurationSource corsConfigurationSource() {
         var configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
         configuration.setAllowedMethods(List.of("*"));

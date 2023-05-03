@@ -5,6 +5,7 @@ import {ImplicitLoginComponent} from "./login/implicit-login.component";
 import {LoginFormComponent} from "./login/login-form.component";
 import {RegisterComponent} from "./user/register.component";
 import {UserDetailsComponent} from "./user/user-details.component";
+import {TrainComponent} from "./train/train.component";
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'login-implicit', component: ImplicitLoginComponent},
   { path: 'login-form', component: LoginFormComponent},
   { path: 'register', component: RegisterComponent},
-  { path: 'user-details', component: UserDetailsComponent}
+  { path: 'user-details', component: UserDetailsComponent},
+  { path: 'trains', component: TrainComponent},
 ];
 
 @NgModule({
