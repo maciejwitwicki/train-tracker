@@ -1,15 +1,29 @@
 <div class="content" role="main">
 
-  <div class="card">
-    <p>Trains</p>
-    {{locations}}
-  </div>
-  <ul>
-    <div *ngFor="let loc of locations" class="highlight-card">
-      <div>{{loc.id}}</div>
-      <div>{{loc.destination}}</div>
-      <div>{{loc.coordinates.lon}}</div>
-      <div>{{loc.coordinates.lat}}</div>
-    </div>
-  </ul>
+  <div><a (click)="addMarker()">Add marker</a> | <a (click)="zoomToFit()">Zoom to fit all trains</a></div>
+
+  <google-map
+    #googleMap
+    id="map"
+    height="700px"
+    width="700px"
+    [zoom]="zoom"
+    [center]="center"
+    [options]="options"
+  >
+    <map-marker
+      *ngFor="let marker of markers"
+      [position]="marker.position"
+      [label]="marker.label"
+      [title]="marker.title"
+      [options]="marker.options"
+    >
+    </map-marker>
+
+  </google-map>
+
+</div>
+
+<div *ngFor="let train of trainLocations()" class="highlight-card">
+  {{train.id}} - {{train.name}} to {{train.destination}} with speed {{train.speed}} Km/h [{{train.coordinates.lat}}} {{train.coordinates.lon}}]
 </div>

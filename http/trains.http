@@ -8,7 +8,7 @@ grant_type=password&client_id=train-tracker&password=user1&username=user1&client
 client.global.set("accessToken", response.body.access_token)
  %}
 
-### post train location
+### PUT train location
 PUT http://localhost:8080/trains/1/location
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
@@ -17,7 +17,16 @@ Authorization: Bearer {{accessToken}}
   "name": "Intercity 4",
   "destination": "Tampere",
   "speed": 65.3,
-  "coordinates": [60.5039, 25.1335]
+  "coordinates": [17.5479, 51.1735]
+}
+
+### set worker location feature flag value
+PUT http://localhost:8080/worker
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "numberOfItems": 4
 }
 
 ###

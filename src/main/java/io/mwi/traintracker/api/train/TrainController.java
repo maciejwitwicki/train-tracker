@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 class TrainController {
 
-    private final TrainService trainService;
+    private final TrainEventService trainService;
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<SSEvent<TrainLocation>> getTrains() {
@@ -22,7 +22,7 @@ class TrainController {
 
     @PutMapping("/{trainId}/location")
     void updateTrainLocation(@PathVariable String trainId, @RequestBody TrainLocationRequest request) {
-        var lonLat = lonLatFromList(request.coordinates());
+        var lonLat = latLonFromList(request.coordinates());
         var location = TrainLocation.builder()
                 .id(trainId)
                 .name(request.name())
@@ -34,7 +34,7 @@ class TrainController {
         trainService.updateTrainLocation(location);
     }
 
-    private TrainLocation.LonLat lonLatFromList(List<BigDecimal> coordinates) {
-        return new TrainLocation.LonLat(coordinates.get(0), coordinates.get(1));
+    private TrainLocation.LatLon latLonFromList(List<BigDecimal> coordinates) {
+        return new TrainLocation.LatLon(coordinates.get(1), coordinates.get(0));
     }
 }

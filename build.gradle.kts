@@ -7,8 +7,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.1.0")
     implementation("org.keycloak:keycloak-admin-client:21.1.1")
+    implementation("com.github.ben-manes.caffeine:caffeine")
     compileOnly("org.mapstruct:mapstruct:1.5.5.Final")
     compileOnly("org.projectlombok:lombok:1.18.26")
 

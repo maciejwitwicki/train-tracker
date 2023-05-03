@@ -1,9 +1,9 @@
 export interface ServerEvent {
   type: string;
-  value: TrainLocationEvent | null;
+  value: TrainLocation | null;
 }
 
-export interface TrainLocationEvent {
+export interface TrainLocation {
   id: string;
   name: string;
   speed: number;
@@ -11,7 +11,8 @@ export interface TrainLocationEvent {
   coordinates: LonLat
 }
 
-interface LonLat {
-  lon: number;
+export interface LonLat {
   lat: number;
+  lon: number;
 }
+
