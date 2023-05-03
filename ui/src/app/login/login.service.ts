@@ -19,7 +19,8 @@ export class LoginService {
     return this.loginHttpClient.post<AccessTokenResponse>(LoginService.LOGIN_URL, {
       username: user,
       password
-    }).pipe(
+    })
+      .pipe(
       tap({
         next: tokenResponse => this.authService.setAccessToken(tokenResponse.accessToken, tokenResponse.expiresInSeconds),
         error: err => console.error('Error while trying to login', err)

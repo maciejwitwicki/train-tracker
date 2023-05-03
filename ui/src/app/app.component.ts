@@ -1,7 +1,4 @@
 import {Component} from '@angular/core';
-import {UserService} from "./user/user.service";
-import {Router} from "@angular/router";
-import {UserCredentials} from "./user/user.model";
 import {AuthService} from "./auth/auth.service";
 
 @Component({

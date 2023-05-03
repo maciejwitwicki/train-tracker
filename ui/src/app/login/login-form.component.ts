@@ -28,7 +28,6 @@ export class LoginFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
@@ -38,8 +37,8 @@ export class LoginFormComponent implements OnInit {
     const password = this.getPasswordField().value;
     this.loginService.login(username, password)
       .subscribe({
-        next: (tokenResponse) => {
-          this.router.navigateByUrl('/');
+        next: (token) => {
+          this.router.navigateByUrl('/user-details');
         },
         error: () => {
           this.loading = false;

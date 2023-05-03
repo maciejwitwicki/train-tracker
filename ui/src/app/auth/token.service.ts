@@ -33,11 +33,9 @@ export class TokenService {
 
   getAccessToken(): string | null {
     if (this.hasAccessToken()) {
-      const accessToken = this.cookieService.get('access_token');
-      console.log("access token cookie value", accessToken);
-      return accessToken;
+      return this.cookieService.get(TokenService.TOKEN_COOKIE_NAME);
     } else {
-      throw new Error("no access token");
+      throw new Error("No access token");
     }
   }
 

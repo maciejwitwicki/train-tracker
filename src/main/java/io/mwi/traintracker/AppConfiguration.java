@@ -15,11 +15,15 @@ import java.util.List;
 @EnableWebFluxSecurity
 public class AppConfiguration {
 
+    private static final String[] NOT_SECURED_ENDPOINTS = {
+            "/login", "/register", "/actuator/**", "/swagger-ui.html", "/webjars/swagger-ui/**", "/v3/api-docs/**"
+    };
+
     @Bean
-    public SecurityWebFilterChain filterChain(ServerHttpSecurity http) throws Exception {
+    public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         http
                 .authorizeExchange()
-                .pathMatchers("/login", "/register").permitAll()
+                .pathMatchers(NOT_SECURED_ENDPOINTS).permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .csrf().disable()
@@ -40,4 +44,6 @@ public class AppConfiguration {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 }

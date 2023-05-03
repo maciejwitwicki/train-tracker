@@ -1,0 +1,20 @@
+<div class="content" [hidden]="!(authenticated() && hasUserDetails())">
+  <div class="card">
+    User details
+  </div>
+  <div class="card highlight-card">
+    <div>User name: {{userDetails.name}}</div>
+  </div>
+  <div class="card highlight-card">
+    <div>User email: {{userDetails.email}}</div>
+  </div>
+</div>
+
+<div [hidden]="!hasError()">
+  <div>Error loading user details</div>
+  <span>{{error}}</span>
+</div>
+<div [hidden]="authenticated()">
+  <p>Login to see your user details</p>
+</div>
+

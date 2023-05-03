@@ -21,7 +21,9 @@ This will start:
 gradlew bootRun
 ```
 
-This will start API service for train-tracker available under http://localhost:8080
+This will start API service for train-tracker available at http://localhost:8080
+
+Swagger UI is available at http://localhost:8080/swagger-ui.html
 
 ## Start train-tracker UI
 
@@ -32,4 +34,4 @@ cd ui
 ng serve
 ```
 
-This will start UI application available under http://localhost:4200
+This will start UI application available at http://localhost:4200

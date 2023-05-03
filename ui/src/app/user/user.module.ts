@@ -4,9 +4,10 @@ import {HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from "./register.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {UserDetailsComponent} from "./user-details.component";
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, UserDetailsComponent],
   imports: [
     HttpClientModule,
     CommonModule,

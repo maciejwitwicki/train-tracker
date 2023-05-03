@@ -13,7 +13,6 @@ spring:
       resource-server:
         jwt:
           issuer-uri: http://localhost:28080/realms/master
-#          jwk-set-uri: http://localhost:28080/realms/master/protocol/openid-connect/certs
 
 logging.level:
   org:
@@ -25,7 +24,6 @@ io.mwi.keycloak:
   client-id: train-tracker
   client-secret: TTVi5v3DHAXh1lGpIymYg0G4qmjWCVGa
   admin:
-    url: http://localhost:28080/admin/realms/master
     id: admin-cli
     user: admin
     password: admin

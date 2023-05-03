@@ -13,9 +13,7 @@ export class AuthService {
   private static readonly ACCESS_TOKEN_URL_PARAM = 'access_token';
   private static readonly EXPIRES_IN_URL_PARAM = 'expires_in';
   private static readonly CLIENT_ID = 'train-tracker';
-  private static readonly REDIRECT_URI = 'http://localhost:4200/home';
-
-  private loggedInListeners: Array<Function> = [];
+  private static readonly REDIRECT_URI = 'http://localhost:4200/user-details';
 
   constructor(
     private router: Router,
@@ -58,10 +56,6 @@ export class AuthService {
     window.location.href = `${AuthService.LOGOUT_URL}?${params}`;
   }
 
-  onLoggedInEvent(callback: Function) {
-    this.loggedInListeners.push(callback);
-  }
-
   setAccessToken(token: string, expiresInSeconds: number) {
     this.updateAccessToken(token, expiresInSeconds);
   }
@@ -69,7 +63,6 @@ export class AuthService {
 
   private updateAccessToken(token: string, expiresIn: number | null) {
     this.tokenService.saveAccessToken(token, expiresIn);
-    this.loggedInListeners.forEach(callback => callback());
   }
 
   private listenToNavigationEndEvent(router: Router) {
