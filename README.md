@@ -1,6 +1,10 @@
 # train-tracker
 angular + spring boot 3, oauth2 secured
 
+![train-tracker](screenshot.png "App screenshot")
+
+**Important**: Repository doesn't contain the Google API Key due to safety reasons. This means that when you run the app locally you won't be able to see the map. 
+
 # Running locally
 Follow the steps in given order
 ## Start docker compose
