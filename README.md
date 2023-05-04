@@ -18,7 +18,7 @@ This will start:
 *Prerequisite*: java 19 jdk installed
 
 ```shell
-gradlew bootRun
+gradlew bootRun --args='--spring.profiles.active=local'
 ```
 
 This will start API service for train-tracker available at http://localhost:8080

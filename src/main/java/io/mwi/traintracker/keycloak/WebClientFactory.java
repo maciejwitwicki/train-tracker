@@ -44,5 +44,4 @@ class WebClientFactory {
         return oauth;
     }
 
-
 }

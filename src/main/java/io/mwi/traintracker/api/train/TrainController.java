@@ -1,5 +1,6 @@
 package io.mwi.traintracker.api.train;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ class TrainController {
     }
 
     @PutMapping("/{trainId}/location")
-    void updateTrainLocation(@PathVariable String trainId, @RequestBody TrainLocationRequest request) {
+    void updateTrainLocation(@PathVariable String trainId, @Valid @RequestBody TrainLocationRequest request) {
         var lonLat = latLonFromList(request.coordinates());
         var location = TrainLocation.builder()
                 .id(trainId)

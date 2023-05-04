@@ -33,15 +33,15 @@ public class KeycloakAdminClient {
     }
 
     public Mono<String> createUser(String username, String password, String email) {
-        var creds = new CredentialRepresentation();
-        creds.setType("password");
-        creds.setTemporary(false);
-        creds.setValue(password);
+        var credentials = new CredentialRepresentation();
+        credentials.setType("password");
+        credentials.setTemporary(false);
+        credentials.setValue(password);
         var user = new UserRepresentation();
         user.setUsername(username);
         user.setEnabled(true);
         user.setEmail(email);
-        user.setCredentials(List.of(creds));
+        user.setCredentials(List.of(credentials));
         return webClient.post()
                 .uri(USERS_URL)
                 .bodyValue(user)

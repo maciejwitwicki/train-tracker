@@ -1,0 +1,33 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak-registration:
+            authorization-grant-type: client_credentials
+            client-id: super-user
+            client-secret: super-user-secret
+        provider:
+          keycloak-registration:
+            issuer-uri: http://localhost:28080/realms/master
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:28080/realms/master
+
+logging.level:
+  org:
+    springframework.security: trace
+
+io.mwi.keycloak:
+  url: http://localhost:28080
+  realm: master
+  client-id: train-tracker
+  client-secret: TTVi5v3DHAXh1lGpIymYg0G4qmjWCVGa
+  admin:
+    id: admin-cli
+    user: admin
+    password: admin
+  super-user:
+    id: super-user
+    secret: super-user-secret
+

@@ -17,7 +17,7 @@ Authorization: Bearer {{accessToken}}
   "name": "Intercity 4",
   "destination": "Tampere",
   "speed": 65.3,
-  "coordinates": [17.5479, 51.1735]
+  "coordinates":  [23.774141, 61.499223]
 }
 
 ### set worker location feature flag value

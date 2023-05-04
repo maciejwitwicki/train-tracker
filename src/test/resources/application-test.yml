@@ -1,3 +1,13 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak-registration:
+            authorization-grant-type: client_credentials
+            client-id: super-user
+            client-secret: super-user-secret
+
 logging.level:
   org:
     springframework.security: trace

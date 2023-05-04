@@ -25,5 +25,5 @@
 </div>
 
 <div *ngFor="let train of trainLocations()" class="highlight-card">
-  {{train.id}} - {{train.name}} to {{train.destination}} with speed {{train.speed}} Km/h [{{train.coordinates.lat}}} {{train.coordinates.lon}}]
+  {{train.id}} - {{train.name}} to {{train.destination}} with speed {{train.speed}} Km/h [{{train.coordinates.lon}}, {{train.coordinates.lat}}]
 </div>

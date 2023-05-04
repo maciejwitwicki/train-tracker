@@ -1,6 +1,5 @@
-package io.mwi.traintracker.api.user;
+package io.mwi.traintracker.api;
 
-import io.mwi.traintracker.keycloak.KeycloakClientException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -16,18 +15,32 @@ import java.util.stream.Stream;
 @RestControllerAdvice
 public class ExceptionHandlers {
 
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleException(Exception e) {
+        log.error("Unhandled exception", e);
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(ApiClientException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleApiClientException(ApiClientException e) {
+        log.warn("Client exception", e);
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(ApiServerException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleApiServerException(ApiServerException e) {
+        log.warn("Internal server error", e);
+        return e.getMessage();
+    }
+
     @ExceptionHandler(WebClientResponseException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleWebClientException(WebClientResponseException e) {
         log.error("Web client exception", e);
         return e.getResponseBodyAsString();
-    }
-
-    @ExceptionHandler(KeycloakClientException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleKeycloakClientException(KeycloakClientException e) {
-        log.warn("Keycloak exception", e);
-        return e.getMessage();
     }
 
     @ExceptionHandler(WebExchangeBindException.class)
@@ -43,13 +56,6 @@ public class ExceptionHandlers {
                     }
                 });
 
-    }
-
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleException(Exception e) {
-        log.error("Unhandled exception", e);
-        return e.getMessage();
     }
 
 }

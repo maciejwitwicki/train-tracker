@@ -1,5 +1,6 @@
 package io.mwi.traintracker.api.login;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ public class LoginController {
     private final AccessTokenService accessTokenService;
 
     @PostMapping
-    public Mono<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+    public Mono<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
         return accessTokenService.getAccessTokenByUserCredentials(loginRequest.username(), loginRequest.password());
     }
 }

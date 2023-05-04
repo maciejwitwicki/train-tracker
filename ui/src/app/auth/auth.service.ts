@@ -13,7 +13,8 @@ export class AuthService {
   private static readonly ACCESS_TOKEN_URL_PARAM = 'access_token';
   private static readonly EXPIRES_IN_URL_PARAM = 'expires_in';
   private static readonly CLIENT_ID = 'train-tracker';
-  private static readonly REDIRECT_URI = 'http://localhost:4200/user-details';
+  private static readonly POST_LOGIN_REDIRECT_URI = 'http://localhost:4200/user-details';
+  private static readonly POST_LOGOUT_REDIRECT_URI = 'http://localhost:4200';
 
   constructor(
     private router: Router,
@@ -27,7 +28,7 @@ export class AuthService {
     const params = [
       'scope=openid',
       `client_id=${AuthService.CLIENT_ID}`,
-      `redirect_uri=${AuthService.REDIRECT_URI}`,
+      `redirect_uri=${AuthService.POST_LOGIN_REDIRECT_URI}`,
       'response_type=token'
     ].join('&');
 
@@ -42,14 +43,10 @@ export class AuthService {
     return this.tokenService.getAccessToken();
   }
 
-  getAuthHeaders() {
-    return this.tokenService.getAuthHeaders();
-  }
-
   logout() {
     this.tokenService.removeToken();
     const params = [
-      `post_logout_redirect_uri=${AuthService.REDIRECT_URI}`,
+      `post_logout_redirect_uri=${AuthService.POST_LOGOUT_REDIRECT_URI}`,
       `client_id=${AuthService.CLIENT_ID}`
     ].join('&');
 

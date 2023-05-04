@@ -17,7 +17,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.mapstruct:mapstruct:1.5.5.Final")
+    testImplementation("org.testcontainers:testcontainers:1.18.0")
+    testImplementation("org.testcontainers:junit-jupiter:1.18.0")
+    testImplementation("com.github.dasniko:testcontainers-keycloak:2.5.0")
     testCompileOnly("org.projectlombok:lombok:1.18.26")
+
 
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
     annotationProcessor("org.projectlombok:lombok:1.18.26")

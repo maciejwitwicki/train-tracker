@@ -1,5 +1,6 @@
 package io.mwi.traintracker.api.train;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -9,16 +10,17 @@ import java.time.Duration;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class TrainEventService {
 
-    private final Sinks.Many<SSEvent<TrainLocation>> trains = Sinks.many()
-            .multicast().directBestEffort();
+    private static final int KEEP_ALIVE_INTERVAL_SECONDS = 10;
+    private final Sinks.Many<SSEvent<TrainLocation>> trains = buildEventsSink();
+    private final Flux<SSEvent<TrainLocation>> keepAlive = buildKeepAliveEmitter();
 
-    private final Flux<SSEvent<TrainLocation>> keepAlive = Flux.interval(Duration.ofSeconds(10))
-            .map(i -> new SSEvent<>("KEEP_ALIVE", null));
+    private final TrainEventFactory trainEventFactory;
 
     public void updateTrainLocation(TrainLocation location) {
-        trains.tryEmitNext(new SSEvent<>("TRAIN_LOCATION", location));
+        trains.tryEmitNext(trainEventFactory.createTrainLocationEvent(location));
     }
 
     Flux<SSEvent<TrainLocation>> getEventStream() {
@@ -28,11 +30,21 @@ public class TrainEventService {
         ).map(TrainEventService::logEvents);
     }
 
+    private static Sinks.Many<SSEvent<TrainLocation>> buildEventsSink() {
+        return Sinks.many()
+                .multicast().directBestEffort();
+    }
+
     private static SSEvent<TrainLocation> logEvents(SSEvent<TrainLocation> event) {
         if (event.value() != null) {
             log.info("SSE: {}", event);
         }
         return event;
+    }
+
+    private Flux<SSEvent<TrainLocation>> buildKeepAliveEmitter() {
+        return Flux.interval(Duration.ofSeconds(KEEP_ALIVE_INTERVAL_SECONDS))
+                .map(i -> trainEventFactory.createKeepAliveEvent());
     }
 
 }

@@ -29,17 +29,13 @@ public class KeycloakLoginClient {
                 .retrieve()
                 .onStatus(
                         HttpStatusCode::is4xxClientError,
-                        error -> Mono.error(new KeycloakClientException("Keycloak error (User input exception): " + error.bodyToMono(String.class)))
+                        error -> Mono.error(new KeycloakClientException("Keycloak user input error: " + error.bodyToMono(String.class)))
                 )
                 .onStatus(
                         HttpStatusCode::is5xxServerError,
-                        error -> Mono.error(new KeycloakClientException("Keycloak error (Server error): " + error.bodyToMono(String.class)))
+                        error -> Mono.error(new KeycloakServerException("Keycloak server error: " + error.bodyToMono(String.class)))
                 )
-                .bodyToMono(AccessTokenResponse.class)
-                .onErrorMap(error -> {
-                    throw new KeycloakClientException("boo");
-                });
-
+                .bodyToMono(AccessTokenResponse.class);
 
     }
 
