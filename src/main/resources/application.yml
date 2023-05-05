@@ -4,9 +4,9 @@ logging.level:
 
 io.mwi.keycloak:
   url: http://localhost:28080
-  realm: master
+  realm: train-station
   client-id: train-tracker
-  client-secret: TTVi5v3DHAXh1lGpIymYg0G4qmjWCVGa
+  client-secret: pbNRHTGXDydeQt7aXfs8tIRfiYXSQbvf
   admin:
     id: admin-cli
     user: admin

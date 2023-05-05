@@ -7,7 +7,7 @@ import {filter, map} from "rxjs";
 @Injectable()
 export class AuthService {
 
-  private static readonly AUTH_BASE_URL = 'http://localhost:28080/realms/master/protocol/openid-connect';
+  private static readonly AUTH_BASE_URL = 'http://localhost:28080/realms/train-station/protocol/openid-connect';
   private static readonly AUTH_URL = AuthService.AUTH_BASE_URL + '/auth'
   private static readonly LOGOUT_URL = AuthService.AUTH_BASE_URL + '/logout'
   private static readonly ACCESS_TOKEN_URL_PARAM = 'access_token';

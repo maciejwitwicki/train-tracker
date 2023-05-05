@@ -39,3 +39,10 @@ ng serve
 ```
 
 This will start UI application available at http://localhost:4200
+
+## Enable real-live train tracking
+
+To display trains on the map:
+- using the idea http client (./http/trains.http) request for the auth token by firing the `### get access token` request
+- set the feature flag value to non-zero number using the `### set worker location feature flag value`
+- press the `Zoom to fit all trains` link to pan the map

@@ -20,7 +20,7 @@ public class BaseIntegrationTest {
     @DynamicPropertySource
     private static void dynamicPropertySource(DynamicPropertyRegistry registry) {
         var authServerUrl = keycloak.getAuthServerUrl();
-        var issuerUri = authServerUrl + "realms/master";
+        var issuerUri = authServerUrl + "realms/train-station";
         registry.add("spring.security.oauth2.client.provider.keycloak-registration.issuer-uri", () -> issuerUri);
         registry.add("spring.security.oauth2.resource-server.jwt.issuer-uri", () -> issuerUri);
         registry.add("io.mwi.keycloak.url", () -> authServerUrl);
