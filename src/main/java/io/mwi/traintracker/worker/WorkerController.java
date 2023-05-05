@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/worker")
 @RequiredArgsConstructor
-public class WorkerController {
+class WorkerController {
 
     private final WorkerFeatureFlagService workerFeatureFlagService;
 

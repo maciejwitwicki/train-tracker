@@ -11,12 +11,12 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/login")
-public class LoginController {
+class LoginController {
 
     private final AccessTokenService accessTokenService;
 
     @PostMapping
-    public Mono<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
+    Mono<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
         return accessTokenService.getAccessTokenByUserCredentials(loginRequest.username(), loginRequest.password());
     }
 }

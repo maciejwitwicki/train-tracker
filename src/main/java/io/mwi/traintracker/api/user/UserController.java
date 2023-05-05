@@ -12,12 +12,12 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+class UserController {
 
     private final UserService userService;
 
     @PostMapping("/register")
-    public Mono<UserDto> createUser(@Valid @RequestBody CreateUserRequest user) {
+    Mono<UserDto> createUser(@Valid @RequestBody CreateUserRequest user) {
         return userService.createUser(
                 user.username(),
                 user.password(),
@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public Mono<UserDto> getUser(Principal principal) {
+    Mono<UserDto> getUser(Principal principal) {
         return userService.getUserById(principal.getName());
     }
 

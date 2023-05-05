@@ -17,7 +17,7 @@ class UserService {
                 .flatMap(this::getUserById);
     }
 
-    public Mono<UserDto> getUserById(String userId) {
+    Mono<UserDto> getUserById(String userId) {
         return keycloakAdminClient.getUserById(userId)
                 .map(userMapper::mapUserRepresentation);
     }

@@ -13,7 +13,7 @@ import java.time.Clock;
 public class AppConfiguration {
 
     @Bean
-    Clock clock() {
+    public Clock clock() {
        return Clock.systemUTC();
     }
 

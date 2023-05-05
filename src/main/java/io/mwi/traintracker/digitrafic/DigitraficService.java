@@ -7,8 +7,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Clock;
-
 @Service
 public class DigitraficService {
 
@@ -16,12 +14,10 @@ public class DigitraficService {
     private static final String COMPOSITIONS_URL = "/v1/compositions/{departureDate}/{trainId}";
     private static final String STATIONS_URL = "/v1/metadata/stations";
 
-    private final Clock clock;
     private final WebClient webClient;
 
-    DigitraficService(Clock clock, DigitraficWebClientFactory factory) {
+    DigitraficService(DigitraficWebClientFactory factory) {
         webClient = factory.createTrainLocationWebClient();
-        this.clock = clock;
     }
 
     public Flux<DigitrafficTrainLocation> getTrainLocations() {

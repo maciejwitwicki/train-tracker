@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+interface UserMapper {
 
     @Mapping(target = "name", source = "username")
     UserDto mapUserRepresentation(UserRepresentation userRepresentation);

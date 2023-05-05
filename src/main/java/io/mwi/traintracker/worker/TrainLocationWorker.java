@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class TrainLocationWorker {
+class TrainLocationWorker {
 
     private final WorkerFeatureFlagService workerFeatureFlagService;
     private final TrainLocationService trainLocationService;

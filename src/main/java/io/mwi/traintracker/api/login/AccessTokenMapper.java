@@ -5,7 +5,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface AccessTokenMapper {
+interface AccessTokenMapper {
 
     @Mapping(target = "expiresInSeconds", source = "expiresIn")
     LoginResponse mapAccessTokenResponse(AccessTokenResponse accessTokenResponse);
