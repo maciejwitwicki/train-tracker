@@ -15,6 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class KeycloakAdminClientIntegrationTest extends BaseIntegrationTest {
 
     private static final String USERNAME = randomString();
+    private static final String FIRSTNAME = randomString();
+    private static final String LASTNAME = randomString();
     private static final String PASSWORD = randomString();
     private static final String EMAIL = "test@gmail.com";
 
@@ -23,7 +25,7 @@ class KeycloakAdminClientIntegrationTest extends BaseIntegrationTest {
 
     @Test
     void createUser() {
-        var result = StepVerifier.create(toTest.createUser(USERNAME, PASSWORD, EMAIL));
+        var result = StepVerifier.create(toTest.createUser(FIRSTNAME, LASTNAME, USERNAME, EMAIL, PASSWORD));
 
         AtomicReference<String> createdUserId = new AtomicReference<>("");
 

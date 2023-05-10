@@ -1,0 +1,22 @@
+### get access token
+< pre-auth.js
+POST http://localhost:28080/realms/train-station/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&client_id={{clientId}}&password={{password}}&username={{user}}&client_secret={{clientSecret}}
+
+> post-auth.js
+
+### PUT train location
+PUT http://localhost:8080/trains/1/location
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "name": "Intercity 6",
+  "destination": "Tampere",
+  "speed": 65.3,
+  "coordinates":  [23.794141, 61.499223]
+}
+
+###

@@ -18,10 +18,7 @@ class UserController {
 
     @PostMapping("/register")
     Mono<UserDto> createUser(@Valid @RequestBody CreateUserRequest user) {
-        return userService.createUser(
-                user.username(),
-                user.password(),
-                user.email());
+        return userService.createUser(user);
     }
 
     @GetMapping("/users")

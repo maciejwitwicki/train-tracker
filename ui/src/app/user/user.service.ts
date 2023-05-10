@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpBackend, HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {UserDetails} from "./user.model";
+import {CreateUserRequest, UserDetails} from "./user.model";
 
 @Injectable()
 export class UserService {
@@ -19,12 +19,7 @@ export class UserService {
     return this.http.get<UserDetails>(UserService.USERS_URL);
   }
 
-  createUser(username: any, password: any, email: any) {
-    const request = {
-      username,
-      password,
-      email
-    };
+  createUser(request: CreateUserRequest) {
     return this.registerHttpClient.post<UserDetails>(UserService.REGISTER_URL, request);
   }
 }

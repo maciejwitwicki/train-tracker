@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from "./user.service";
+import {CreateUserRequest, UserDetails} from "./user.model";
 
 @Component({templateUrl: 'register.component.html'})
 export class RegisterComponent implements OnInit {
@@ -21,6 +22,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', Validators.required]
@@ -37,10 +40,15 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     this.error = null;
-    const username = this.getUsernameField().value;
-    const password = this.getPasswordField().value;
-    const email = this.getEmailField().value;
-    this.userService.createUser(username, password, email)
+
+    const user: CreateUserRequest = {
+      firstname: this.getFirstnameField().value,
+      lastname: this.getLastnameField().value,
+      username: this.getUsernameField().value,
+      password: this.getPasswordField().value,
+      email: this.getEmailField().value,
+    }
+    this.userService.createUser(user)
       .subscribe({
         next: (tokenResponse) => {
           this.created = true;
@@ -53,6 +61,14 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  getFirstnameField() {
+    return this.getFormField('firstname');
+  }
+
+  getLastnameField() {
+    return this.getFormField('lastname');
+  }
+
   getUsernameField() {
     return this.getFormField('username');
   }
@@ -63,6 +79,14 @@ export class RegisterComponent implements OnInit {
 
   getEmailField() {
     return this.getFormField('email');
+  }
+
+  getFormFirstnameRequired(): boolean {
+    return this.getFormFieldErrors(this.getFirstnameField());
+  }
+
+  getFormLastnameRequired(): boolean {
+    return this.getFormFieldErrors(this.getLastnameField());
   }
 
   getFormPasswordRequired(): boolean {

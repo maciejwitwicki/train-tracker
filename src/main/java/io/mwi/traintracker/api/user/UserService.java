@@ -12,8 +12,13 @@ class UserService {
     private final KeycloakAdminClient keycloakAdminClient;
     private final UserMapper userMapper;
 
-    Mono<UserDto> createUser(String username, String password, String email) {
-        return keycloakAdminClient.createUser(username, password, email)
+    Mono<UserDto> createUser(CreateUserRequest user) {
+        return keycloakAdminClient.createUser(
+                        user.firstname(),
+                        user.lastname(),
+                        user.username(),
+                        user.email(),
+                        user.password())
                 .flatMap(this::getUserById);
     }
 

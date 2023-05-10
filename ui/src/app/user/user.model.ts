@@ -1,9 +1,10 @@
 export interface UserDetails {
-  name: string;
-  email: string;
+  firstname: string,
+  lastname: string,
+  username: string,
+  email: string,
 }
 
-export interface UserCredentials {
-  userName: string;
-  password: string;
+export interface CreateUserRequest extends UserDetails {
+  password: string
 }

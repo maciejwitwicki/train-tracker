@@ -32,12 +32,14 @@ public class KeycloakAdminClient {
                 .bodyToMono(UserRepresentation.class);
     }
 
-    public Mono<String> createUser(String username, String password, String email) {
+    public Mono<String> createUser(String firstname, String lastname, String username, String email, String password) {
         var credentials = new CredentialRepresentation();
         credentials.setType("password");
         credentials.setTemporary(false);
         credentials.setValue(password);
         var user = new UserRepresentation();
+        user.setFirstName(firstname);
+        user.setLastName(lastname);
         user.setUsername(username);
         user.setEnabled(true);
         user.setEmail(email);

@@ -21,7 +21,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   hasUserDetails() {
-    return !!this.userDetails.name;
+    return !!this.userDetails.username;
   }
 
   authenticated() {
